@@ -1,0 +1,36 @@
+docker network create spring-net
+docker run -p 3307:3306 --name mysqldb --network spring-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=bootdb -d mysql:8
+docker image build -t employeedocker . -f DockerFile
+docker container run --network spring-net --name emp-container -p 8090:8080 -d employeedocker
+docker container exec -it mysqldb bash
+
+------------------
+docker image build -t tejsinghsaini1977/manytoonerelation . -f Dockerfile
+docker push tejsinghsaini1977/manytoonerelation
+
+minikube start
+minikube delete
+minikube stop
+minikube status
+minikube ip
+
+kubectl apply -f db-deployment.yaml
+kibectl get deployment
+kibectl get node
+kibectl get pods
+kibectl get services
+kibectl get svc
+
+kubectl apply -f app-deployment.yaml
+kubectl get deployment
+kubectl get node
+kubectl get pods
+kubectl get services
+kubectl get svc
+
+
+kubectl exec -it <pod_name> bash
+kubectl exec -it mysql-744d977cbd-m78vn bash
+mysql -uroot -proot
+kubectl logs <pod_name>
+kubectl port-forward service/springboot-crud-svc 8090:8080
